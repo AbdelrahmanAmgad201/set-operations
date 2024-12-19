@@ -8,6 +8,7 @@ public class SetOperations {
     private final List<String> universe;
     private int bitRepresentation;
 
+    // Constructor
     public SetOperations(List<String> universe) {
         if (universe == null || universe.isEmpty()) {
             throw new IllegalArgumentException("Universe cant be null");
@@ -16,7 +17,7 @@ public class SetOperations {
         this.bitOperations = new BitOperations();
         this.bitRepresentation = 0;
     }
-
+    // We set corresponding bit to true
     public void addElement(String element) {
         int position = universe.indexOf(element);
         if (position == -1) {
@@ -24,7 +25,7 @@ public class SetOperations {
         }
         bitRepresentation = bitOperations.setBit(bitRepresentation, position);
     }
-
+    // We set corresponding bit to false
     public void removeElement(String element) {
         int position = universe.indexOf(element);
         if (position == -1) {
@@ -32,7 +33,7 @@ public class SetOperations {
         }
         bitRepresentation = bitOperations.clearBit(bitRepresentation, position);
     }
-
+    // We map the bit representation to its String representation
     public List<String> getElements() {
         List<String> elements = new ArrayList<>();
         for (int i = 0; i < universe.size(); i++) {
@@ -42,7 +43,7 @@ public class SetOperations {
         }
         return elements;
     }
-
+    // Return Set size
     public int getCardinality() {
         int count = 0;
         for (int i = 0; i < universe.size(); i++) {
@@ -52,21 +53,21 @@ public class SetOperations {
         }
         return count;
     }
-
+    // Using bitwise OR
     public SetOperations union(SetOperations other) {
         validateSameUniverse(other);
         SetOperations result = new SetOperations(universe);
         result.bitRepresentation = this.bitRepresentation | other.bitRepresentation;
         return result;
     }
-
+    // Using bitwise And
     public SetOperations intersection(SetOperations other) {
         validateSameUniverse(other);
         SetOperations result = new SetOperations(universe);
         result.bitRepresentation = this.bitRepresentation & other.bitRepresentation;
         return result;
     }
-
+    // Using bitwise not
     public SetOperations complement() {
         SetOperations result = new SetOperations(universe);
         // Make all fields = 1
@@ -74,7 +75,6 @@ public class SetOperations {
         result.bitRepresentation = ~this.bitRepresentation & mask;
         return result;
     }
-
     public SetOperations difference(SetOperations other) {
         validateSameUniverse(other);
         SetOperations result = new SetOperations(universe);

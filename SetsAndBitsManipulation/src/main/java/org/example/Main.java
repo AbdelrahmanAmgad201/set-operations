@@ -22,7 +22,7 @@ public class Main {
     private static void createUniverse() {
         System.out.println("Enter the size of the universe:");
         int size = Integer.parseInt(scanner.nextLine());
-
+        if(size <= 0) throw new IllegalArgumentException("Universe size must be greater than 0");
         universe = new ArrayList<>();
         System.out.println("Enter " + size + " unique elements for the universe:");
 
@@ -42,7 +42,7 @@ public class Main {
     private static void createSets() {
         System.out.println("\nEnter the number of sets you want to create:");
         int numSets = Integer.parseInt(scanner.nextLine());
-
+        if(numSets <= 0) throw new IllegalArgumentException("Number of sets must be greater than 0");
         sets = new ArrayList<>();
 
         for (int i = 0; i < numSets; i++) {
@@ -84,7 +84,7 @@ public class Main {
             }
         }
     }
-
+    // Our main menu options
     private static void printMenu() {
         System.out.println("\nSet Operations Menu:");
         System.out.println("1. Union of two sets");
@@ -96,7 +96,7 @@ public class Main {
         System.out.println("0. Exit");
         System.out.println("Enter your choice:");
     }
-
+    // Our main menu functions
     private static void processChoice(int choice) {
         switch (choice) {
             case 1 -> performUnion();
